@@ -1,0 +1,7 @@
+Created 2026-09-18T19:14:45
+Scene: Assets/Blockout/Scenes/Blockout.unity
+Kit prefab variants: 116
+Validated: player/camera references, one player, one manager, one enabled camera, ground collider, missing scripts.
+Play-mode testing is separate from this authoring check.
+
+Play Mode verification: PASS (10 seconds). Player unlocked, remained grounded at (0,0,0), zero runtime errors. See Logs/BlockoutPlayCheck.txt. This checks startup, not every kit interaction.
