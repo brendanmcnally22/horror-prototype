@@ -34,6 +34,9 @@ MonoBehaviour:
   highQualityFiltering:
     m_OverrideState: 0
     m_Value: 0
+  filter:
+    m_OverrideState: 0
+    m_Value: 0
   downscale:
     m_OverrideState: 0
     m_Value: 0
@@ -306,6 +309,7 @@ MonoBehaviour:
   - {fileID: -3971140415863620753}
   - {fileID: -4979537181270152845}
   - {fileID: 7711244674349729937}
+  - {fileID: 7837897530727685262}
 --- !u!114 &2296498522438197286
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -384,6 +388,31 @@ MonoBehaviour:
     m_Value: 20
   TopLayer:
     m_OverrideState: 1
+    m_Value: 1
+--- !u!114 &7837897530727685262
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac04d2c95f7a6aa4681d48e2bbe16eed, type: 3}
+  m_Name: EyeBlink
+  m_EditorClassIdentifier: Assembly-CSharp::UHFPS.Rendering.EyeBlink
+  active: 0
+  Blink:
+    m_OverrideState: 0
+    m_Value: 0
+  VignetteOuterRing:
+    m_OverrideState: 0
+    m_Value: 0.4
+  VignetteInnerRing:
+    m_OverrideState: 0
+    m_Value: 0.5
+  VignetteAspectRatio:
+    m_OverrideState: 0
     m_Value: 1
 --- !u!114 &8937876670595368749
 MonoBehaviour:

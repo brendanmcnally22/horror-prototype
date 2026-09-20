@@ -293,6 +293,9 @@ namespace UHFPS.Runtime
             // slot grid setting
             slotsLayoutGrid.cellSize = new Vector2(settings.cellSize, settings.cellSize);
             slotsLayoutGrid.spacing = new Vector2(settings.spacing, settings.spacing);
+            // The visual grid must match the logical slot array, regardless of panel width.
+            slotsLayoutGrid.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
+            slotsLayoutGrid.constraintCount = settings.columns;
 
             // slot instantiation
             for (int y = 0; y < settings.rows; y++)
@@ -798,6 +801,8 @@ namespace UHFPS.Runtime
             // slot grid setting
             containerSettings.containerSlots.cellSize = new Vector2(settings.cellSize, settings.cellSize);
             containerSettings.containerSlots.spacing = new Vector2(settings.spacing, settings.spacing);
+            containerSettings.containerSlots.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
+            containerSettings.containerSlots.constraintCount = container.Columns;
 
             // set the container panel size to fit the number of container columns
             Vector2 grdLayoutSize = containerSettings.containerObject.sizeDelta;

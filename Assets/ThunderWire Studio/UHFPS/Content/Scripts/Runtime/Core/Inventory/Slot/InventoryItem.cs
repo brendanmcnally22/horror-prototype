@@ -78,7 +78,7 @@ namespace UHFPS.Runtime
         {
             yield return new WaitForEndOfFrame();
 
-            rectTransform.anchoredPosition = GetItemPosition(lastSlot);
+            rectTransform.localPosition = GetItemPosition(lastSlot);
             isInitialized = true;
         }
 
@@ -149,6 +149,7 @@ namespace UHFPS.Runtime
             itemImage.sprite = icon;
 
             rectTransform = GetComponent<RectTransform>();
+            itemRotation = targetRotation = orientation == Orientation.Vertical ? -90f : 0f;
 
             // icon orientation and scaling
             Vector2 slotSize = rectTransform.rect.size;
@@ -213,13 +214,15 @@ namespace UHFPS.Runtime
 
                 Vector3 angles = transform.localEulerAngles;
                 angles.z = lastRotation;
-                transform.eulerAngles = angles;
+                transform.localEulerAngles = angles;
+                itemRotation = targetRotation = lastRotation;
+                rotationVelocity = 0f;
             }
 
             if (lastSlot != currentSlot)
             {
                 currentSlot = lastSlot;
-                rectTransform.position = GetItemPosition(lastSlot);
+                rectTransform.localPosition = GetItemPosition(lastSlot);
             }
 
             background.color = Inventory.slotSettings.itemNormalColor;
@@ -254,7 +257,11 @@ namespace UHFPS.Runtime
                 if (isMoving && !isRotating && mouseDelta.magnitude > 0)
                 {
                     Vector2Int dimensions = GetItemDimensions();
-                    Vector2 dragPos = mousePosition - dragOffset;
+                    var parentRect = (RectTransform)transform.parent;
+                    var canvas = GetComponentInParent<Canvas>();
+                    Camera uiCamera = canvas && canvas.renderMode != RenderMode.ScreenSpaceOverlay ? canvas.worldCamera : null;
+                    RectTransformUtility.ScreenPointToLocalPointInRectangle(parentRect, mousePosition, uiCamera, out var localPointer);
+                    Vector2 dragPos = localPointer - dragOffset;
                     Vector2Int newSlotPosition = currentSlot;
                     float distance = Mathf.Infinity;
 
@@ -265,7 +272,7 @@ namespace UHFPS.Runtime
                             InventorySlot slot = Inventory[y, x];
                             if (slot == null) continue;
 
-                            Vector2 position = new Vector2(slot.transform.position.x, slot.transform.position.y);
+                            Vector2 position = parentRect.InverseTransformPoint(slot.transform.position);
                             float slotDistance = Vector2.Distance(dragPos, position);
 
                             if (slotDistance < distance)
@@ -291,7 +298,7 @@ namespace UHFPS.Runtime
                     Vector2 position = rectTransform.localPosition;
                     Vector2 slotPosition = GetItemPosition(currentSlot);
 
-                    position = Vector2.SmoothDamp(position, slotPosition, ref dragVelocity, Inventory.settings.dragTime);
+                    position = Vector2.SmoothDamp(position, slotPosition, ref dragVelocity, Inventory.settings.dragTime, Mathf.Infinity, Time.unscaledDeltaTime);
                     rectTransform.localPosition = position;
                 }
                 else if(isRotating)
@@ -299,7 +306,7 @@ namespace UHFPS.Runtime
                     // item rotation
                     if (Mathf.Abs(itemRotation - targetRotation) > 1f)
                     {
-                        itemRotation = Mathf.SmoothDamp(itemRotation, targetRotation, ref rotationVelocity, Inventory.settings.rotateTime);
+                        itemRotation = Mathf.SmoothDamp(itemRotation, targetRotation, ref rotationVelocity, Inventory.settings.rotateTime, Mathf.Infinity, Time.unscaledDeltaTime);
                     }
                     else
                     {
@@ -311,7 +318,7 @@ namespace UHFPS.Runtime
 
                     Vector3 angles = transform.localEulerAngles;
                     angles.z = itemRotation;
-                    transform.eulerAngles = angles;
+                    transform.localEulerAngles = angles;
                 }
 
                 // inventory inputs
