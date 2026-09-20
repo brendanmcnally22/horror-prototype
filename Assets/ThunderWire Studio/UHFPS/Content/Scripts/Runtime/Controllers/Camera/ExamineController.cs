@@ -490,7 +490,7 @@ namespace UHFPS.Runtime
             // paper reading
             if (!isHotspotShown) // if the hotspot is not shown, you can read the paper or take the item
             {
-                if (currentItem.InteractableType == InteractableTypeEnum.ExamineItem && currentItem.IsPaper && !string.IsNullOrEmpty(currentItem.PaperText))
+                if ((currentItem.InteractableType == InteractableTypeEnum.ExamineItem || currentItem.InteractableType == InteractableTypeEnum.InventoryItem) && currentItem.IsPaper && !string.IsNullOrEmpty(currentItem.PaperText))
                 {
                     if (InputManager.ReadButtonOnce(this, Controls.USE))
                     {
