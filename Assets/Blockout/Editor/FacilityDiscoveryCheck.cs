@@ -53,9 +53,9 @@ public static class FacilityDiscoveryCheck
             {
                 if(EditorApplication.timeSinceStartup-start<8)return;
                 power=UnityEngine.Object.FindAnyObjectByType<FacilityPowerSequence>();Require(power,"Power sequence missing.");
-                Require(!power.PowerCut&&power.SecurityDoors.Length==2,"Initial sequence state incorrect.");
+                Require(power.PowerCut&&power.SecurityDoors.Length==2,"Arrival emergency sequence state incorrect.");
                 Require(power.GetComponent<PrototypeLever>().Targets.SequenceEqual(power.SecurityDoors),"LEVER1 targets incorrect.");
-                Require(!power.ObjectiveDisplay.Text.gameObject.activeSelf,"Fuse objective appeared before blackout.");
+                Require(power.ObjectiveDisplay.Text.gameObject.activeSelf,"Restore-power objective missing on arrival.");
                 storage=UnityEngine.Object.FindObjectsByType<PrototypeMover>(FindObjectsSortMode.None).Single(x=>x.name=="STORAGE PLATFORM");storageStart=storage.MovingPart.position;
                 normal=Spawn<FacilityLamp>("Facility Light - White Steady");emergency=Spawn<FacilityLamp>("Facility Light - Green Steady");
                 stepTime=EditorApplication.timeSinceStartup;phase=1;return;
@@ -67,14 +67,14 @@ public static class FacilityDiscoveryCheck
                 power.GetComponent<PrototypeLever>().InteractStart();
                 var lever=UnityEngine.Object.FindObjectsByType<PrototypeLever>(FindObjectsSortMode.None).Single(x=>x.name=="STORAGE LEVER");
                 Require(lever.Targets.Length==1&&lever.Targets[0]==storage,"Storage target incorrect.");lever.InteractStart();
-                Require(!power.PowerCut,"Power cut before doors finished opening.");phase=2;return;
+                Require(power.PowerCut,"Facility should already be on reserve power.");phase=2;return;
             }
             if(phase==2)
             {
-                if(!power.PowerCut)return;
+                if(!power.SecurityDoors.All(x=>x.AtEnd))return;
                 Require(power.SecurityDoors.All(x=>x.AtEnd),"Power cut before both doors fully opened.");
                 Require(Vector3.Distance(storage.MovingPart.position,storageStart)>1,"Storage platform did not move.");
-                Require(normal.Sources.All(x=>!x.enabled)&&emergency.Sources.All(x=>x.enabled),"Normal/emergency circuits failed.");
+                Require(normal.Sources.All(x=>x.enabled&&x.color.r>.9f&&x.color.b<.2f)&&emergency.Sources.All(x=>x.enabled),"Amber/emergency circuits failed.");
                 Require(power.EmergencyLights.All(x=>x.enabled)&&power.ObjectiveDisplay.Text.gameObject.activeSelf,"Emergency lamps or objective failed.");
                 var loop=power.ObjectiveDisplay.Loop;var box=UnityEngine.Object.FindAnyObjectByType<FuseboxPuzzle>();
                 Require(box&&box.Fuses.Count(x=>x.IsInserted)==1,"Expected one preinstalled fuse.");
@@ -88,7 +88,7 @@ public static class FacilityDiscoveryCheck
                 power.ObjectiveDisplay.Refresh();Require(power.ObjectiveDisplay.Text.text.Contains("POWER RESTORED"),"Completion objective failed.");
                 power.GetComponent<PrototypeLever>().InteractStart();Require(power.PowerRestored,"Lever replay reset the power sequence.");
                 Require(errors.Count==0,string.Join("\n",errors));
-                Finish("PASS: LEVER1 opens both fitted sliding doors; blackout waits for both arrivals; storage lever moves storage platform; steady lights have no shadows; normal lights go off and emergency lights remain on; objective appears at blackout; native fusebox accepts three pack fuses (one preinstalled); first restores local light, third restores full power; sequence does not reset on lever replay. Gameplay errors: 0. Known Unity toolbar layout errors excluded.\n");
+                Finish("PASS: arrival reserve power and fuse objective; LEVER1 opens both fitted sliding doors; storage lever moves storage platform; steady lights have no shadows; white lights stay enabled amber and emergency lights remain on; native fusebox accepts three pack fuses (one preinstalled); first restores local light, third restores full power; sequence does not reset on lever replay. Gameplay errors: 0. Known Unity toolbar layout errors excluded.\n");
             }
         }
         catch(Exception e){Finish("FAIL: "+e+"\n"+string.Join("\n",errors));}

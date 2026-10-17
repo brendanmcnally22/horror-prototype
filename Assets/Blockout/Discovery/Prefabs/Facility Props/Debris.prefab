@@ -1,0 +1,483 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3582820467136215209
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5960338487829854747}
+  m_Layer: 0
+  m_Name: Debris
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5960338487829854747
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3582820467136215209}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -152.82642, y: 0.7152895, z: -1.4675683}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7563397037745519410}
+  - {fileID: 4942626731624051268}
+  - {fileID: 2238579831624417776}
+  - {fileID: 7494318752159028112}
+  - {fileID: 6369169590739041206}
+  - {fileID: 4313092088575734315}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &2305262363832643624
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5960338487829854747}
+    m_Modifications:
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.3222995
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.3223
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.3222992
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.1598053
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5737177
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.1299032
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.27126876
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.2394758
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.9271198
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.09753761
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 18.106
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -208.689
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 24.299
+      objectReference: {fileID: 0}
+    - target: {fileID: 7679318509416583194, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_Name
+      value: Debris - Concrete Rubble_18
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 87de413c636bfa148af25903906541dd, type: 3}
+--- !u!4 &2238579831624417776 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+  m_PrefabInstance: {fileID: 2305262363832643624}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4267101273173197811
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5960338487829854747}
+    m_Modifications:
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.3222997
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.3223
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.3222997
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.0746765
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.0696583
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.13131177
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.3181528
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.4190574
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.82579976
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.20303804
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 37.012
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -206.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 44.827
+      objectReference: {fileID: 0}
+    - target: {fileID: 7679318509416583194, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_Name
+      value: Debris - Concrete Rubble_21
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 87de413c636bfa148af25903906541dd, type: 3}
+--- !u!4 &4313092088575734315 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+  m_PrefabInstance: {fileID: 4267101273173197811}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4934638197160051612
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5960338487829854747}
+    m_Modifications:
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.3222995
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.3223
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.3222995
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.22862244
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.3984859
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.023434281
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.07912683
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.25852504
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.9627444
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.0052043484
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -1.77
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -171.076
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 29.924
+      objectReference: {fileID: 0}
+    - target: {fileID: 7679318509416583194, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_Name
+      value: Debris - Concrete Rubble_16
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 87de413c636bfa148af25903906541dd, type: 3}
+--- !u!4 &4942626731624051268 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+  m_PrefabInstance: {fileID: 4934638197160051612}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6381374618144983662
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5960338487829854747}
+    m_Modifications:
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.3223
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.3223
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.3223
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.0785828
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.6975566
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.08376157
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.4976827
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.15209599
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.851693
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.061626464
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 2.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -240.16101
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 18.709
+      objectReference: {fileID: 0}
+    - target: {fileID: 7679318509416583194, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_Name
+      value: Debris - Concrete Rubble_20
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 87de413c636bfa148af25903906541dd, type: 3}
+--- !u!4 &6369169590739041206 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+  m_PrefabInstance: {fileID: 6381374618144983662}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7501433544079674090
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5960338487829854747}
+    m_Modifications:
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.3222995
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.3223
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.3222995
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.07912683
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.25852504
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.9627444
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.0052043484
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -1.77
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -171.076
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 29.924
+      objectReference: {fileID: 0}
+    - target: {fileID: 7679318509416583194, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_Name
+      value: Debris - Concrete Rubble_15
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 87de413c636bfa148af25903906541dd, type: 3}
+--- !u!4 &7563397037745519410 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+  m_PrefabInstance: {fileID: 7501433544079674090}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7560924380629131848
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5960338487829854747}
+    m_Modifications:
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.3223
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.3223
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.3223002
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.045227
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.15160769
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.37448537
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.2240233
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.07308158
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7975237
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.55536354
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 66.719
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -135.678
+      objectReference: {fileID: 0}
+    - target: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 19.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 7679318509416583194, guid: 87de413c636bfa148af25903906541dd, type: 3}
+      propertyPath: m_Name
+      value: Debris - Concrete Rubble_19
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 87de413c636bfa148af25903906541dd, type: 3}
+--- !u!4 &7494318752159028112 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 66682738400408024, guid: 87de413c636bfa148af25903906541dd, type: 3}
+  m_PrefabInstance: {fileID: 7560924380629131848}
+  m_PrefabAsset: {fileID: 0}

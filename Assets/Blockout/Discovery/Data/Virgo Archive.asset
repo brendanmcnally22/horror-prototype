@@ -1,0 +1,129 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5970a76594470146bc9ddfa9a763ba0, type: 3}
+  m_Name: Virgo Archive
+  m_EditorClassIdentifier: Assembly-CSharp::Blockout.Discovery.VirgoArchive
+  Records:
+  - Title: 01 / Welcome to Virgo
+    Clearance: 0
+    Body: 'VIRGO CORPORATION
+
+      Personnel orientation / revised 1995
+
+
+      Our work began with a government medical research contract in the 1950s. Our mandate: help patients whose bodies reject transplanted tissue.
+
+
+      Every restored life begins with careful work. Record your observations. Maintain confidentiality. Respect restricted areas.'
+  - Title: 02 / Emergency power
+    Clearance: 0
+    Body: 'FACILITIES NOTICE
+
+
+      Amber illumination means the facility is operating on reserve power. It is not a total blackout.
+
+
+      The electrical panel by the entry route requires THREE replacement fuses. Insert each fuse as you find it; do not wait to carry all three. The first restores a local circuit. The third restores normal facility lighting.
+
+
+      Do not bypass missing fuses. Report damaged equipment to extension 204.'
+  - Title: 03 / Carrier maintenance
+    Clearance: 0
+    Body: 'LINE MONITOR / SERVICE CARD
+
+
+      The lower maintenance carrier is 96.40 MHz. Tune the workstation receiver, hold a stable signal for two seconds, then decode.
+
+
+      The carrier carries a repeating service message. A strong signal alone is not confirmation; wait for the lock indicator.
+
+
+      Please stop leaving the receiver at full volume.'
+  - Title: 04 / Staff notices
+    Clearance: 0
+    Body: 'BREAK ROOM BULLETIN
+
+
+      Relay Break is approved for meal periods. It is not an electrical training simulator.
+
+
+      Please return mugs to their owners. Property left in lockers is to remain there until Personnel collects it.
+
+
+      Night staff: some extensions route to old recorded messages. A ringing line does not establish that the department is occupied.'
+  - Title: 05 / Research milestones
+    Clearance: 1
+    Body: 'ARCHIVE ABSTRACT / MEDICAL DIVISION
+
+
+      Early studies addressed the rejection of transplanted biological tissue. Later reports describe successful integration across previously incompatible donor and recipient pairs.
+
+
+      The archive describes a treatment referred to only as the serum. Its production records are absent from this terminal.
+
+
+      A handwritten note on the scanned cover reads: ''Acceptance is not the same as adaptation.'''
+  - Title: 06 / Personnel discrepancy
+    Clearance: 1
+    Body: 'PERSONNEL RECONCILIATION
+
+
+      Several station employees are listed as having stopped attending work. Their personal property remains on site.
+
+
+      The dates on the departure forms do not match the final internal access entries. Each amendment was approved by P. Dutton.
+
+
+      Status: reconciliation suspended by Director''s Office.'
+  - Title: 07 / Dutton private notes
+    Clearance: 2
+    Body: 'DIRECTOR''S LOCAL COPY
+
+
+      We learned to replace what was lost. Why did we decide that restoration was the limit?
+
+
+      The old committees measured success against an ordinary body. Their standard was the flaw.
+
+
+      Attachment references: observation ward; candidate assessments. The source files are held physically in this office.'
+  - Title: 08 / Candidate intake
+    Clearance: 2
+    Body: 'INTAKE CROSS-REFERENCE
+
+
+      Radio station applications have been assigned internal assessment numbers. The criteria extend far beyond employment requirements.
+
+
+      Emergency contacts, unexplained absence risk, and physical observations appear beside interview notes.
+
+
+      The newest entry is marked NIGHT SHIFT / ARRIVAL CONFIRMED. Photograph retained in the paper file.'
+  Extensions:
+  - Number: 204
+    Department: Maintenance
+    Transcript: 'RECORDED SERVICE MESSAGE: Reserve supply active. Replace the three missing panel fuses. Normal lighting returns once all circuits are connected.'
+  - Number: 101
+    Department: Reception
+    Transcript: The desk is unattended. Visitors must remain in reception until collected.
+  - Number: 309
+    Department: Records
+    Transcript: Your request has been logged. Personnel amendments require approval from the Director's Office.
+  - Number: 000
+    Department: Operator
+    Transcript: '[A relay clicks. There is breathing on the line. The connection closes.]'
+  HiddenFrequency: 96.4
+  DecodedMessage: 'MAINTENANCE / LOWER CIRCUIT
+
+    Three replacement fuses required. Return to the entry electrical panel.
+
+    Voice line: extension 204.'

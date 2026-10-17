@@ -22,7 +22,20 @@ namespace Blockout.Discovery
         {
             if (rider && other.gameObject == rider.gameObject) Release();
         }
-        void OnDisable() { Release(); }
+        void OnDisable()
+        {
+#if UNITY_EDITOR
+            // Scene teardown restores the edit-mode hierarchy itself. Reparenting
+            // a child during its parent's deactivation is rejected by Unity.
+            if (!UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode)
+            {
+                if (rider) Physics.autoSyncTransforms = previousSync;
+                rider = null;
+                return;
+            }
+#endif
+            Release();
+        }
         void Release()
         {
             if (!rider) return;
