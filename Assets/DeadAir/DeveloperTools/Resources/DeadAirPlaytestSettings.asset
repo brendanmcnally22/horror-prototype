@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b735b272217888040a3e80e8e9a6d6ee, type: 3}
+  m_Name: DeadAirPlaytestSettings
+  m_EditorClassIdentifier: Assembly-CSharp::DeadAir.Playtesting.PlaytestSettings
+  Enabled: 1
+  AllowInReleaseBuilds: 0
+  EnableDeveloperUI: 1
+  MenuKey: 101
+  AutoRecord: 1
+  SamplesPerSecond: 10
+  StationaryHeartbeat: 1
+  FlushInterval: 5
+  RecordCamera: 1
+  PrototypeVersion: 
+  MapLayers:
+    serializedVersion: 2
+    m_Bits: 4294958935
+  CameraHeight: 80
+  MinimumElevation: -20
+  MaximumElevation: 50
+  HeatmapCellSize: 1

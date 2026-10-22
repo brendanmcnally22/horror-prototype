@@ -27,20 +27,23 @@ namespace Blockout.Discovery
         {
             if(!Mover){Debug.LogWarning("Parent this gate under a platform's Carriage, or assign its Mover.",this);return;}
             if(!Mover.TravelRequested&& (Mover.TargetEnd?OpenAtEnd:OpenAtStart))SetLeaves(true,true);
+            else SetLeaves(false,true);
         }
         void Update()
         {
             if(!Mover||!LeftLeaf||!RightLeaf)return;
             bool travel=Mover.TravelRequested;
             Blocked=false;
-            if(travel)
+            // Obstruction may cancel departure at a landing, never open the cabin in the shaft.
+            if(travel && !Mover.IsTravelling)
             {
                 var scaled=Vector3.Scale(EntranceSize,transform.lossyScale)*.5f;scaled=new Vector3(Mathf.Abs(scaled.x),Mathf.Abs(scaled.y),Mathf.Abs(scaled.z));
                 foreach(var hit in Physics.OverlapBox(transform.TransformPoint(EntranceCenter),scaled,transform.rotation,~0,QueryTriggerInteraction.Ignore))
                     if(hit.GetComponentInParent<PlayerManager>()){Blocked=true;break;}
                 if(Blocked&&Time.time>nextHint){DiscoveryLoop.Hint("Clear the doorway — the platform cannot move until the gate closes.");nextHint=Time.time+3;DesignSession.Record("gate_obstructed",name,transform.position);}
             }
-            bool open=Blocked||(!travel&&(Mover.TargetEnd?OpenAtEnd:OpenAtStart));
+            bool open=Blocked||(!Mover.IsTravelling && !travel &&
+                ((Mover.AtEnd&&OpenAtEnd)||(Mover.AtStart&&OpenAtStart)));
             SetLeaves(open,false);
         }
         void SetLeaves(bool open,bool instant)

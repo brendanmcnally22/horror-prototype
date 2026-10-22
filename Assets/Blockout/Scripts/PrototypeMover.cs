@@ -20,6 +20,7 @@ namespace Blockout.Discovery
         public bool TargetEnd { get; private set; }
         public bool AtEnd => TargetEnd && arrived;
         public bool AtStart => !TargetEnd && arrived;
+        public bool IsTravelling { get; private set; }
         public bool TravelRequested => MovingPart && (MovingPart.localPosition-(origin+(TargetEnd?Travel:Vector3.zero))).sqrMagnitude>.000001f;
         readonly System.Collections.Generic.List<PlatformSafetyGate> gates = new System.Collections.Generic.List<PlatformSafetyGate>();
         public void RegisterGate(PlatformSafetyGate gate){if(!gates.Contains(gate))gates.Add(gate);}
@@ -49,10 +50,11 @@ namespace Blockout.Discovery
             }
             float desiredSpeed = Acceleration > 0 ? Mathf.Min(Speed, Mathf.Sqrt(2 * Acceleration * distance)) : Speed;
             currentSpeed = Acceleration > 0 ? Mathf.MoveTowards(currentSpeed, desiredSpeed, Acceleration * Time.deltaTime) : Speed;
+            if(distance>.001f) IsTravelling=true;
             MovingPart.localPosition = Vector3.MoveTowards(MovingPart.localPosition, target, Mathf.Max(.001f, currentSpeed) * Time.deltaTime);
             if ((MovingPart.localPosition - target).sqrMagnitude > .000001f) return;
             MovingPart.localPosition = target; currentSpeed = 0;
-            arrived = true; resume = Time.time + EndPause;
+            arrived = true; IsTravelling=false; resume = Time.time + EndPause;
             if(gates.Count>0)DesignSession.Record("platform_arrived",name,MovingPart.position,TargetEnd?1:0);
             if (TargetEnd) OnArrivedAtEnd.Invoke(); else OnArrivedAtStart.Invoke();
         }
