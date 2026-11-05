@@ -13,6 +13,8 @@ namespace Blockout.Discovery
         [Tooltip("Metres/second squared. Zero uses constant speed; a low value gives heavy machinery a slow start and stop.")]
         [Min(0)] public float Acceleration;
         public bool Automatic;
+        [Tooltip("Return to the starting position after End Pause, then wait for the next use. Does not repeat automatically.")]
+        public bool ReturnAfterUse;
         [Min(0)] public float EndPause = 2;
         public bool StartAtEnd;
         public UnityEvent OnArrivedAtStart = new UnityEvent();
@@ -39,8 +41,10 @@ namespace Blockout.Discovery
         {
             if (arrived)
             {
-                if (!Automatic || Time.time < resume) return;
-                SetEnd(!TargetEnd);
+                if (Time.time < resume) return;
+                if (Automatic) SetEnd(!TargetEnd);
+                else if (ReturnAfterUse && TargetEnd) SetEnd(false);
+                else return;
             }
             var target = origin + (TargetEnd ? Travel : Vector3.zero);
             float distance = Vector3.Distance(MovingPart.localPosition, target);
