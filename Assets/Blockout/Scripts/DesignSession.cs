@@ -31,6 +31,7 @@ namespace Blockout.Discovery
         public static void Record(string eventName,string zone,Vector3 position,float value=0,float duration=0)
         {
             if(!Application.isPlaying||quitting)return;
+            DeadAir.Playtesting.PlaytestRecorder.Record(eventName,zone,position,value,duration);
             if(!instance)new GameObject("Playtest Session Log").AddComponent<DesignSession>();
             instance.Write(eventName,zone,position,value,duration);
         }

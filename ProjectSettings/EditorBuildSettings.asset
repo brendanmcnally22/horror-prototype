@@ -6,6 +6,24 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/DeadAir/PlaytestHub/Scenes/Playtest Menu.unity
+    guid: 036cb093272a9fc49a6df9efda285d6e
+  - enabled: 1
+    path: Assets/DeadAir/PlaytestHub/Scenes/AI Discovery Trial.unity
+    guid: d0f3d403a0a6e3640a2112be0132e9c5
+  - enabled: 1
+    path: Assets/DeadAir/PlaytestHub/Scenes/Security Terminal Trial.unity
+    guid: 05a7f45aa8165f441b0f787707b1db60
+  - enabled: 1
+    path: Assets/DeadAir/PlaytestHub/Scenes/Three Doors Lighting Trial.unity
+    guid: 9c6b2072adda67d4184991fc9bdf8658
+  - enabled: 1
+    path: Assets/DeadAir/PlaytestHub/Scenes/Playtest Feedback.unity
+    guid: 3a68c01a142f1cc43917cdf2b407929e
+  - enabled: 1
+    path: Assets/DeadAir/PlaytestHub/Scenes/Playtest Results.unity
+    guid: fe9515d42a7fc3f47ab5b8ba58320230
+  - enabled: 1
     path: Assets/Blockout/Discovery/Scenes/Discovery Blank.unity
     guid: 4b2db48d7e55b0a449c4c827d3f11c48
   - enabled: 0

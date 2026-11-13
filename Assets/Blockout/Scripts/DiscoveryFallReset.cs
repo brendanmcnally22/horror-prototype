@@ -24,6 +24,7 @@ namespace Blockout.Discovery
             // Leave the physics callback before unloading the current level.
             yield return null;
             var scene = gameObject.scene;
+            foreach(var rider in FindObjectsByType<PrototypeRider>(FindObjectsSortMode.None))rider.ReleaseBeforeSceneChange();
             SaveGameManager.ClearLoadType();
             SaveGameManager.ClearLoadName();
             Time.timeScale = 1;

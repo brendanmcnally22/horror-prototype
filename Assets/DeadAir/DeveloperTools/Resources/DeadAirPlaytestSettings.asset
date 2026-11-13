@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DeadAirPlaytestSettings
   m_EditorClassIdentifier: Assembly-CSharp::DeadAir.Playtesting.PlaytestSettings
   Enabled: 1
-  AllowInReleaseBuilds: 0
+  AllowInReleaseBuilds: 1
   EnableDeveloperUI: 1
   MenuKey: 101
   AutoRecord: 1

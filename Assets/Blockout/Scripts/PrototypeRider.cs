@@ -24,6 +24,13 @@ namespace Blockout.Discovery
         }
         void OnDisable()
         {
+            // During scene teardown the carriage and its children are being deactivated.
+            // Unity must finish destroying that hierarchy without reparenting it here.
+            if(!gameObject.activeInHierarchy || (Platform&&!Platform.gameObject.activeInHierarchy))
+            {
+                if(rider)Physics.autoSyncTransforms=previousSync;
+                rider=null;return;
+            }
 #if UNITY_EDITOR
             // Scene teardown restores the edit-mode hierarchy itself. Reparenting
             // a child during its parent's deactivation is rejected by Unity.
@@ -36,6 +43,7 @@ namespace Blockout.Discovery
 #endif
             Release();
         }
+        public void ReleaseBeforeSceneChange(){Release();}
         void Release()
         {
             if (!rider) return;

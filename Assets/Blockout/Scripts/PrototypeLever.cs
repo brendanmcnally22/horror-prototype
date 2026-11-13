@@ -7,6 +7,8 @@ namespace Blockout.Discovery
     public class PrototypeLever : MonoBehaviour, IInteractStart, IInteractTitle
     {
         public string Label = "Lever";
+        public string OffPrompt = "Switch on / move";
+        public string OnPrompt = "Switch off / return";
         public Transform Handle;
         public Vector3 OffAngle = new Vector3(-35, 0, 0);
         public Vector3 OnAngle = new Vector3(35, 0, 0);
@@ -14,6 +16,7 @@ namespace Blockout.Discovery
         public bool Jammed;
         [TextArea] public string JamMessage = "JAMMED — The mechanism won't move.";
         public AudioClip JamSound;
+        public Vector3 JamRecoilAxis = Vector3.right;
         float jamUntil;
         AudioSource jamAudio;
         [Tooltip("Keep multiple controls for one platform in sync.")]
@@ -26,7 +29,7 @@ namespace Blockout.Discovery
             if (!Jammed && FollowTarget && Targets.Length > 0 && Targets[0]) IsOn = Targets[0].TargetEnd;
             UpdateHandle();
         }
-        void UpdateHandle() { if (Handle) Handle.localEulerAngles = (IsOn ? OnAngle : OffAngle) + Vector3.right * (Time.time < jamUntil ? Mathf.Sin((jamUntil-Time.time)*45)*3 : 0); }
+        void UpdateHandle() { if (Handle) Handle.localEulerAngles = (IsOn ? OnAngle : OffAngle) + JamRecoilAxis * (Time.time < jamUntil ? Mathf.Sin((jamUntil-Time.time)*45)*3 : 0); }
         public void InteractStart()
         {
             if(Jammed)
@@ -45,6 +48,6 @@ namespace Blockout.Discovery
             if (Handle) Handle.localEulerAngles = IsOn ? OnAngle : OffAngle;
             foreach (var target in Targets) if (target) target.SetEnd(IsOn);
         }
-        public TitleParams InteractTitle() => new TitleParams { title = Jammed ? "JAMMED LEVER" : Label, button1 = Jammed ? "Stuck — cannot operate" : IsOn ? "Switch off / return" : "Switch on / move" };
+        public TitleParams InteractTitle() => new TitleParams { title = Jammed ? "JAMMED LEVER" : Label, button1 = Jammed ? "Stuck — cannot operate" : IsOn ? OnPrompt : OffPrompt };
     }
 }

@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442c6dda21d60984b98071954dac51ac, type: 3}
+  m_Name: DeadAirPlaytestHub
+  m_EditorClassIdentifier: Assembly-CSharp::DeadAir.Playtesting.PlaytestHubConfig
+  MenuScene: Assets/DeadAir/PlaytestHub/Scenes/Playtest Menu.unity
+  FeedbackScene: Assets/DeadAir/PlaytestHub/Scenes/Playtest Feedback.unity
+  ResultsScene: Assets/DeadAir/PlaytestHub/Scenes/Playtest Results.unity
+  Experiences:
+  - Id: discovery
+    Title: AI + Discovery
+    Description: Explore the facility and return the three fuses.
+    ScenePath: Assets/DeadAir/PlaytestHub/Scenes/AI Discovery Trial.unity
+    Kind: 0
+  - Id: security
+    Title: Security Terminal
+    Description: Operate security while the facility remains active.
+    ScenePath: Assets/DeadAir/PlaytestHub/Scenes/Security Terminal Trial.unity
+    Kind: 1
+  - Id: lighting
+    Title: Three Doors
+    Description: Try three levers under green, red, and flickering white light.
+    ScenePath: Assets/DeadAir/PlaytestHub/Scenes/Three Doors Lighting Trial.unity
+    Kind: 2
