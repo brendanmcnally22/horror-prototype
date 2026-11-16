@@ -88,7 +88,7 @@ namespace DeadAir.Playtesting
             if(Time.realtimeSinceStartupAsDouble>=nextSave){nextSave=Time.realtimeSinceStartupAsDouble+5;HubRunStore.Save(CurrentRun);}
             if(GameManager.HasReference&&GameManager.Instance.PlayerDied){CurrentRun.deaths++;Finish("failed","player_death");return;}
             if(Definition.Kind==HubExperienceKind.Discovery&&discovery&&discovery.Returned>=discovery.RequiredFuses){Finish("completed","three_fuses_returned");return;}
-            if(Definition.Kind==HubExperienceKind.Security&&CurrentRun.terminalSeconds>=Experience.SecurityOperatingSeconds){Finish("completed","security_operating_goal");}
+            // Security is an open-ended evaluation; the player finishes via F6.
             if(Definition.Kind==HubExperienceKind.Lighting&&lightingFinishedAt>=0&&Time.time>=lightingFinishedAt)Finish("completed","three_lighting_doors_tested");
         }
         void LateUpdate()
@@ -98,6 +98,7 @@ namespace DeadAir.Playtesting
         void TrackEvent(PlaytestEvent evt)
         {
             if(CurrentRun==null)return;
+            if(evt.type=="scout_spotted")CurrentRun.scoutSpots++;
             if(evt.type=="fuse_returned")CurrentRun.fuseReturns=Mathf.Max(CurrentRun.fuseReturns,Mathf.RoundToInt(evt.value));
             if(evt.type=="terminal_opened"||evt.type=="security_terminal_opened")CurrentRun.terminalUses++;
             if(evt.type=="lever_used"||evt.type=="lighting_door_used"||evt.type=="security_door_used")CurrentRun.interactions++;
@@ -178,3 +179,5 @@ namespace DeadAir.Playtesting
         void OnDestroy(){SceneManager.sceneLoaded-=SceneLoaded;if(Instance==this){SealRun("interrupted","play_mode_ended");Instance=null;}}
     }
 }
+
+

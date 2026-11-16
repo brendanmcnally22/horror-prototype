@@ -40,7 +40,7 @@ namespace DeadAir.Playtesting
             if(Experience.Page==HubPage.Experience&&!SwitcherOpen&&!loading)
             {
                 var text=Experience.Objective+"\nF6 — switch experience / finish test";
-                if(Definition!=null&&Definition.Kind==HubExperienceKind.Security&&CurrentRun!=null)text+="\nTerminal operation: "+Duration(CurrentRun.terminalSeconds)+" / "+Duration(Experience.SecurityOperatingSeconds);
+                if(Definition!=null&&Definition.Kind==HubExperienceKind.Security&&CurrentRun!=null)text="Explore the cameras and spot the scouts. Finish whenever you like with F6.\nTerminal operation: "+Duration(CurrentRun.terminalSeconds);
                 if(Definition!=null&&Definition.Kind==HubExperienceKind.Lighting&&CurrentRun!=null)text+="\nDoors tested: "+CurrentRun.lightingOrder.Count+" / 3";
                 GUI.Label(new Rect(18,Screen.height-105,Mathf.Min(600,Screen.width-36),100),text,hubSmall);return;
             }
@@ -135,6 +135,7 @@ namespace DeadAir.Playtesting
                 GUILayout.Space(8);
                 GUILayout.Label("Active play time  "+Duration(r.activeSeconds)+"     Total elapsed  "+Duration(r.wallSeconds),hubBody);
                 GUILayout.Label("Fuses returned  "+r.fuseReturns+"     Deaths  "+r.deaths+"     Interactions  "+r.interactions,hubBody);
+                if(r.experienceId=="security")GUILayout.Label("Successful scout spots  "+r.scoutSpots,hubBody);
                 GUILayout.Label("Terminal uses  "+r.terminalUses+"     Time operating terminal  "+Duration(r.terminalSeconds),hubBody);
                 if(r.lightingOrder.Count>0)
                     GUILayout.Label("Lighting order: "+string.Join(" → ",r.lightingOrder.Select((v,i)=>v+(i<r.lightingTimes.Count?" ("+Duration(r.lightingTimes[i])+")":""))),hubBody);
@@ -153,3 +154,5 @@ namespace DeadAir.Playtesting
         static string Score(int value)=>value<=0?"—":value+"/5";
     }
 }
+
+

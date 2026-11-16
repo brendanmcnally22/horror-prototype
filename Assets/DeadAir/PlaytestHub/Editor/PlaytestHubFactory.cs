@@ -53,7 +53,7 @@ public static partial class PlaytestHubSetup
         WithScene(SecurityScene,scene=>
         {
             UpgradeCRTInstances(scene);
-            ExperienceMarker(scene,"security",HubPage.Experience,"Operate the security terminal for 60 seconds. F6 switches experiences.");
+            ExperienceMarker(scene,"security",HubPage.Experience,"Explore the cameras and spot scouts. F6 finishes the test.");
             var terminal=All(scene).Select(t=>t.GetComponent<VirgoTerminal>()).FirstOrDefault(t=>t&&!t.PhoneOnly);
             if(!All(scene).Any(t=>t.GetComponent<SecurityTrialTerminal>()))
             {
@@ -198,3 +198,4 @@ public static partial class PlaytestHubSetup
         }
     }
 }
+

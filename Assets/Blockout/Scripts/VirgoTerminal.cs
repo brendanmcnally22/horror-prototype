@@ -8,10 +8,14 @@ using DeadAir.Playtesting;
 
 namespace Blockout.Discovery
 {
-    public class VirgoTerminal : MonoBehaviour, IInteractStart, IInteractTitle
+    public partial class VirgoTerminal : MonoBehaviour, IInteractStart, IInteractTitle
     {
         public VirgoArchive Archive;
         public Texture2D DesktopWallpaper;
+        public bool TrialDesktopExtras; public bool ModalAd=>IsOpen&&ad;
+        readonly BunnyBreak bunny=new BunnyBreak();
+        float nextAd; int adIndex; bool ad;
+        static readonly string[] Ads={"CARROT CLUB: Double rations this Friday!","VIRGO MAIL: Your free trial of quieter alarms awaits.","STAFF SPECIAL: Adopt a desktop rabbit today.","CACHE CONTAMINATION","ARCHIVE SCANNER ALERT"};
         public string StationName="RECEPTION-01";
         [Range(0,2)] public int Clearance;
         public bool PhoneOnly;
@@ -70,7 +74,7 @@ namespace Blockout.Discovery
         public void Open()
         {
             if(Active || !Archive)return;
-            Active=this;openedAt=Time.unscaledTime;
+            Active=this;openedAt=Time.unscaledTime;ad=false;nextAd=openedAt+12;if(TrialDesktopExtras){names[2]="Bunny Break";names[3]="Googus";names[0]="File Explorer";}
             oldCursor=Cursor.lockState;oldCursorVisible=Cursor.visible;
             if(GameManager.HasReference){GameManager.Instance.FreezePlayer(true,true);frozen=true;}
             Cursor.lockState=CursorLockMode.None;Cursor.visible=true;
@@ -94,6 +98,7 @@ namespace Blockout.Discovery
             if(!IsOpen)return;
             if(Keyboard.current!=null&&Keyboard.current.escapeKey.wasPressedThisFrame&&Time.unscaledTime-openedAt>.25f){Close();return;}
             if(Keyboard.current!=null&&Keyboard.current.backspaceKey.wasPressedThisFrame)Play(KeySound,generatedKey);
+            if(TrialDesktopExtras&&!PhoneOnly){if(!ad&&Time.unscaledTime>=nextAd){ad=true;adIndex=(adIndex+1)%Ads.Length;}if(windows[2]&&!ad)bunny.Tick(Mathf.Min(.1f,Time.unscaledDeltaTime));}
             if(windows[1])
             {
                 signalHold=SignalStrength>.97f ? Mathf.Min(2,signalHold+Time.unscaledDeltaTime) : 0;
@@ -110,7 +115,7 @@ namespace Blockout.Discovery
         public bool CanRead(VirgoArchive.Record record)=>record!=null&&record.Clearance<=Clearance;
         public void OpenApplication(int index)
         {
-            if(index<0||index>=windows.Length||(index==4&&!Security))return;
+            if((TrialDesktopExtras&&index==1)||index<0||index>=windows.Length||(index==4&&!Security))return;
             if(Security&&Security.IsOpen)Security.Close();
             Array.Clear(windows,0,windows.Length);windows[index]=true;
             if(index==4&&IsOpen)Security.OpenDesktop();
@@ -149,7 +154,7 @@ namespace Blockout.Discovery
         void Styles()
         {
             if(text!=null)return;
-            text=new GUIStyle(GUI.skin.label){fontSize=16,wordWrap=true,richText=false};text.normal.textColor=Color.black;
+            text=new GUIStyle(GUI.skin.label){fontSize=16,wordWrap=true,richText=false};foreach(var state in new[]{text.normal,text.hover,text.active,text.focused,text.onNormal,text.onHover,text.onActive,text.onFocused})state.textColor=Color.black;
             label=new GUIStyle(text){fontSize=14};heading=new GUIStyle(text){fontSize=24,fontStyle=FontStyle.Bold};
             button=new GUIStyle(GUI.skin.button){fontSize=15,wordWrap=true};
             field=new GUIStyle(GUI.skin.textField){fontSize=16};
@@ -166,11 +171,13 @@ namespace Blockout.Discovery
             if(DesktopWallpaper)GUI.DrawTexture(new Rect(0,0,1024,726),DesktopWallpaper,ScaleMode.ScaleAndCrop);
             GUI.color=new Color(.48f,.75f,.7f);GUI.Label(new Rect(570,615,420,40),"V I R G O   /   SYSTEMS",new GUIStyle(heading){fontSize=30});GUI.color=Color.white;
             GUI.Label(new Rect(580,657,420,25),"INTERNAL NETWORK    •    "+StationName);
-            if(!PhoneOnly)for(int i=0;i<(Security?5:4);i++)if(Button(new Rect(22,28+i*92,118,72),new[]{"[=]\nRecords","[~]\nLine Monitor","[+]\nRelay Break","[T]\nTelephone","[o]\nSecurity"}[i]))OpenApplication(i);
+            bool guiWasEnabled=GUI.enabled; if(ad)GUI.enabled=false;
+            if(!PhoneOnly)for(int i=0;i<(Security?5:4);i++)if(!(TrialDesktopExtras&&i==1)&&Button(new Rect(22,28+(TrialDesktopExtras&&i>1?i-1:i)*92,118,72),new[]{TrialDesktopExtras?"[=]\nExplorer":"[=]\nRecords","[~]\nLine Monitor",TrialDesktopExtras?"[B]\nBunny Break":"[+]\nRelay Break",TrialDesktopExtras?"[G]\nGoogus":"[T]\nTelephone","[o]\nSecurity"}[i]))OpenApplication(i);
             for(int i=0;i<windows.Length;i++)if(windows[i])
             {
                 var ev=Event.current;
-                if(ev.type==EventType.MouseDown&&ev.button==0&&new Rect(frames[i].x,frames[i].y,frames[i].width-36,22).Contains(ev.mousePosition)){dragging=i;ev.Use();}
+                if(TrialDesktopExtras)ResizeEvents(i,ev);
+                if(GUI.enabled&&!maximized[i]&&ev.type==EventType.MouseDown&&ev.button==0&&new Rect(frames[i].x,frames[i].y,frames[i].width-72,22).Contains(ev.mousePosition)){dragging=i;ev.Use();}
                 if(dragging==i&&ev.type==EventType.MouseDrag){frames[i].position+=ev.delta;ev.Use();}
                 if(ev.type==EventType.MouseUp)dragging=-1;
                 frames[i].x=Mathf.Clamp(frames[i].x,0,1024-frames[i].width);frames[i].y=Mathf.Clamp(frames[i].y,0,724-frames[i].height);
@@ -185,8 +192,16 @@ namespace Blockout.Discovery
             {
                 int count=Security?5:4;float top=530-(count-4)*38;
                 Fill(new Rect(8,top,180,724-top),ClassicFace);
-                for(int i=0;i<count;i++)if(Button(new Rect(14,top+6+i*38,168,32),names[i])){OpenApplication(i);menu=false;}
+                for(int i=0;i<count;i++)if(!(TrialDesktopExtras&&i==1)&&Button(new Rect(14,top+6+(TrialDesktopExtras&&i>1?i-1:i)*38,168,32),names[i])){OpenApplication(i);menu=false;}
                 GUI.Label(new Rect(18,691,165,23),"Esc: leave computer",label);
+            }
+            GUI.enabled=guiWasEnabled;
+            if(ad){
+                if(adIndex>=3)WarningAd();else {
+                Fill(new Rect(330,225,364,145),ClassicFace);Fill(new Rect(333,228,358,22),ClassicTitle);
+                GUI.Label(new Rect(340,229,300,20),"Sponsored message — VIRGO Intranet",titleBar);
+                GUI.Label(new Rect(348,266,326,65),Ads[adIndex],text);
+                } if(Button(adIndex>=3?new Rect(607,459,120,30):new Rect(545,325,130,30),"Dismiss")){ad=false;nextAd=Time.unscaledTime+35;}
             }
             GUI.matrix=oldMatrix;
         }
@@ -200,9 +215,11 @@ namespace Blockout.Discovery
             Fill(new Rect(0,frames[index].height-1,width,1),Color.black);
             Fill(new Rect(3,2,width-6,18),ClassicTitle);
             GUI.Label(new Rect(10,1,width-48,20),names[index],titleBar);
+            if(TrialDesktopExtras&&Button(new Rect(width-62,1,27,18),maximized[index]?"<>":"[]"))Maximize(index);
             if(Button(new Rect(width-32,1,26,18),"X")){windows[index]=false;if(index==4&&Security)Security.Close();}
-            if(index==0)Records();if(index==1)Receiver();if(index==2)Game();if(index==3)Telephone();
+            if(index==0){if(TrialDesktopExtras)Explorer(width,frames[index].height);else Records();}if(index==1)Receiver();if(index==2){if(TrialDesktopExtras){GUI.Label(new Rect(20,35,530,36),"BUNNY BREAK / Staff arcade",heading);bunny.Draw();}else Game();}if(index==3){if(TrialDesktopExtras)Googus(width,frames[index].height);else Telephone();}
             if(index==4&&windows[index]&&Security){if(!Security.IsOpen)Security.OpenDesktop();Security.DrawDesktop(new Rect(8,28,width-16,frames[index].height-36));}
+            if(TrialDesktopExtras&&!maximized[index])GUI.Label(new Rect(width-18,frames[index].height-20,18,20),"//",label);
         }
         void Records()
         {
@@ -264,3 +281,6 @@ namespace Blockout.Discovery
         }
     }
 }
+
+
+

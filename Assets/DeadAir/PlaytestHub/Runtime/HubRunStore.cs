@@ -13,7 +13,7 @@ namespace DeadAir.Playtesting
         public string id, experienceId, title, scenePath, startedUtc, endedUtc, version, outcome="recording", reason="";
         public double activeSeconds, wallSeconds;
         public bool demo;
-        public int fuseReturns, deaths, interactions, terminalUses;
+        public int fuseReturns, deaths, interactions, terminalUses, scoutSpots;
         public float terminalSeconds;
         public List<string> lightingOrder=new List<string>();
         public List<float> lightingTimes=new List<float>();
@@ -75,3 +75,4 @@ namespace DeadAir.Playtesting
         }
     }
 }
+
