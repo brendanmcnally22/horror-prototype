@@ -2090,6 +2090,14 @@ PrefabInstance:
       value: Pull lever
       objectReference: {fileID: 0}
     - target: {fileID: 3213883049746202328, guid: 9237f62f8f810204bbc649fb438df5bc, type: 3}
+      propertyPath: OnAngle.z
+      value: 195
+      objectReference: {fileID: 0}
+    - target: {fileID: 3213883049746202328, guid: 9237f62f8f810204bbc649fb438df5bc, type: 3}
+      propertyPath: OffAngle.z
+      value: -50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3213883049746202328, guid: 9237f62f8f810204bbc649fb438df5bc, type: 3}
       propertyPath: FollowTarget
       value: 0
       objectReference: {fileID: 0}
@@ -2436,6 +2444,14 @@ PrefabInstance:
     - target: {fileID: 3213883049746202328, guid: 9237f62f8f810204bbc649fb438df5bc, type: 3}
       propertyPath: OffPrompt
       value: Pull lever
+      objectReference: {fileID: 0}
+    - target: {fileID: 3213883049746202328, guid: 9237f62f8f810204bbc649fb438df5bc, type: 3}
+      propertyPath: OnAngle.z
+      value: 195
+      objectReference: {fileID: 0}
+    - target: {fileID: 3213883049746202328, guid: 9237f62f8f810204bbc649fb438df5bc, type: 3}
+      propertyPath: OffAngle.z
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 3213883049746202328, guid: 9237f62f8f810204bbc649fb438df5bc, type: 3}
       propertyPath: FollowTarget
@@ -4766,6 +4782,14 @@ PrefabInstance:
     - target: {fileID: 3213883049746202328, guid: 9237f62f8f810204bbc649fb438df5bc, type: 3}
       propertyPath: OffPrompt
       value: Pull lever
+      objectReference: {fileID: 0}
+    - target: {fileID: 3213883049746202328, guid: 9237f62f8f810204bbc649fb438df5bc, type: 3}
+      propertyPath: OnAngle.z
+      value: 195
+      objectReference: {fileID: 0}
+    - target: {fileID: 3213883049746202328, guid: 9237f62f8f810204bbc649fb438df5bc, type: 3}
+      propertyPath: OffAngle.z
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 3213883049746202328, guid: 9237f62f8f810204bbc649fb438df5bc, type: 3}
       propertyPath: FollowTarget
