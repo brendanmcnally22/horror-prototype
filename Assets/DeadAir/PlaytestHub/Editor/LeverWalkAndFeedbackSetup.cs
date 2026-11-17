@@ -9,6 +9,15 @@ using Blockout.Discovery;
 using UHFPS.Runtime;
 using DeadAir.Playtesting;
 public static class LeverWalkAndFeedbackSetup {
+ [MenuItem("Tools/Dead Air/Set AI Walking To 2.2")]
+ static void WalkOnly(){
+ var previous=SceneManager.GetActiveScene();string path="Assets/DeadAir/PlaytestHub/Scenes/AI Discovery Trial.unity";
+ var scene=SceneManager.GetSceneByPath(path);bool opened=!scene.isLoaded;if(opened)scene=EditorSceneManager.OpenScene(path,OpenSceneMode.Additive);
+ try{var player=scene.GetRootGameObjects().SelectMany(g=>g.GetComponentsInChildren<PlayerManager>(true)).Single();
+ Undo.RecordObject(player.PlayerStateMachine,"Slightly slower walking");player.PlayerStateMachine.PlayerBasicSettings.WalkSpeed=2.2f;EditorUtility.SetDirty(player.PlayerStateMachine);PrefabUtility.RecordPrefabInstancePropertyModifications(player.PlayerStateMachine);EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);
+ File.AppendAllText(Application.dataPath+"/../Logs/LeverWalkFeedbackReset.txt","\nFinal AI walking speed: 2.2 m/s (original was 2.5 m/s).");}
+ finally{if(previous.IsValid())SceneManager.SetActiveScene(previous);if(opened)EditorSceneManager.CloseScene(scene,true);}
+ }
  [MenuItem("Tools/Dead Air/Fix Lever16 Slow AI Walking And Reset Feedback")]
  static void Apply(){
  if(EditorApplication.isPlaying)throw new Exception("Exit Play mode before saving.");
@@ -31,9 +40,9 @@ public static class LeverWalkAndFeedbackSetup {
  }
  }else{
  var player=all.Select(t=>t.GetComponent<PlayerManager>()).Single(p=>p);
- Undo.RecordObject(player.PlayerStateMachine,"Slower AI walking");float old=player.PlayerStateMachine.PlayerBasicSettings.WalkSpeed;player.PlayerStateMachine.PlayerBasicSettings.WalkSpeed=2.6f;
+ Undo.RecordObject(player.PlayerStateMachine,"Slower AI walking");float old=player.PlayerStateMachine.PlayerBasicSettings.WalkSpeed;player.PlayerStateMachine.PlayerBasicSettings.WalkSpeed=2.2f;
  EditorUtility.SetDirty(player.PlayerStateMachine);if(PrefabUtility.IsPartOfPrefabInstance(player.PlayerStateMachine))PrefabUtility.RecordPrefabInstancePropertyModifications(player.PlayerStateMachine);
- lines.Add("AI Discovery walking: "+old+" -> 2.6 m/s. Sprint remains disabled.");
+ lines.Add("AI Discovery walking: "+old+" -> 2.2 m/s. Sprint remains disabled.");
  }
  EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);
  }finally{if(opened)EditorSceneManager.CloseScene(scene,true);}
@@ -51,3 +60,4 @@ public static class LeverWalkAndFeedbackSetup {
  File.WriteAllLines(Application.dataPath+"/../Logs/LeverWalkFeedbackReset.txt",lines);
  }
 }
+

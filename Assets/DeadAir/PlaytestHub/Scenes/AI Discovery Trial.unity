@@ -7945,13 +7945,13 @@ MonoBehaviour:
   OffPrompt: Switch on / move
   OnPrompt: Switch off / return
   Handle: {fileID: 2017990967}
-  OffAngle: {x: -35, y: 0, z: 0}
-  OnAngle: {x: 35, y: 0, z: 0}
+  OffAngle: {x: 0, y: 0, z: -50}
+  OnAngle: {x: 0, y: 0, z: 195}
   IsOn: 0
   Jammed: 0
   JamMessage: "JAMMED \u2014 The mechanism won't move."
   JamSound: {fileID: 0}
-  JamRecoilAxis: {x: 1, y: 0, z: 0}
+  JamRecoilAxis: {x: 0, y: 0, z: 1}
   FollowTarget: 1
   Targets:
   - {fileID: 160877546}
@@ -7977,8 +7977,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.5704966, y: 2.2286582, z: 1.7921438}
-  m_Center: {x: -0.52909523, y: 0.614329, z: 0.39607227}
+  m_Size: {x: 0.84990454, y: 2.1499996, z: 1.8799948}
+  m_Center: {x: -0.2966559, y: 0, z: -0.00000044703484}
 --- !u!1 &190501302
 GameObject:
   m_ObjectHideFlags: 0
@@ -60779,6 +60779,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 9e5ccfb26cb86274fa81da2886193648, type: 3}
       propertyPath: m_Name
       value: Lever_16
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9e5ccfb26cb86274fa81da2886193648, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -177206,7 +177210,7 @@ MonoBehaviour:
     m_Bits: 6145
   ControllerOffset: 0
   PlayerBasicSettings:
-    WalkSpeed: 2.6
+    WalkSpeed: 2.2
     RunSpeed: 6
     CrouchSpeed: 1
     JumpHeight: 1
