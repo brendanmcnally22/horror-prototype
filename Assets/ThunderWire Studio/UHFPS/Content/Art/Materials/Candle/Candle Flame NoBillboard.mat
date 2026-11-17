@@ -117,6 +117,7 @@ Material:
     - _CastShadows: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
+    - _Control_Fade: 0
     - _Cull: 2
     - _Cutoff: 0.5
     - _Depth_Fade: 0.05

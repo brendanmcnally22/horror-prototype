@@ -12,7 +12,7 @@ namespace Blockout.Discovery
         bool showProgress;
         public void Show(string message, bool progress)
         {
-            objective = message; showProgress = progress;
+            bool computer=gameObject.scene.name=="Security Terminal Trial";objective=computer?"Spot enemies on 3 different cameras":message;showProgress=computer?false:progress;
             if (Text) Text.gameObject.SetActive(true);
             Refresh();
         }
@@ -28,3 +28,5 @@ namespace Blockout.Discovery
         void Update() { if (Text && Text.gameObject.activeSelf) Refresh(); }
     }
 }
+
+

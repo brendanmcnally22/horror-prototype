@@ -23,7 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/DeadAir/PlaytestHub/Scenes/Playtest Results.unity
     guid: fe9515d42a7fc3f47ab5b8ba58320230
-  - enabled: 1
+  - enabled: 0
     path: Assets/Blockout/Discovery/Scenes/Discovery Blank.unity
     guid: 4b2db48d7e55b0a449c4c827d3f11c48
   - enabled: 0

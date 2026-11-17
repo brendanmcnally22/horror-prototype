@@ -64,6 +64,7 @@ public sealed class VirgoAppearancePreview : EditorWindow
         var text=new GUIStyle(EditorStyles.label){fontSize=terminal.DesktopFontSize};text.normal.textColor=terminal.TextColor;
         Fill(new Rect(160,70,720,510),terminal.WindowColor);Fill(new Rect(163,73,714,24),terminal.TitleBarColor);
         var title=new GUIStyle(text);title.normal.textColor=Color.white;GUI.Label(new Rect(175,74,650,24),"File Explorer — C:\\Records",title);
+        var close=GUI.backgroundColor;GUI.backgroundColor=Color.red;if(GUI.Button(new Rect(847,74,26,21),"X")){Close();GUI.backgroundColor=close;GUI.matrix=old;GUI.EndGroup();return;}GUI.backgroundColor=close;
         GUI.Label(new Rect(180,110,620,30),"File     Edit     View     Help",text);Fill(new Rect(180,150,680,370),Color.white);
         GUI.Label(new Rect(205,175,620,35),"Reception        Staff        Director",text);
         GUI.Label(new Rect(205,235,620,65),"Select a file to read its contents.\nPreview reflects the selected terminal's colors, font and wallpaper.",text);
@@ -71,3 +72,4 @@ public sealed class VirgoAppearancePreview : EditorWindow
         GUI.matrix=old;GUI.EndGroup();
     }
 }
+

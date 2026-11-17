@@ -5,16 +5,20 @@ namespace DeadAir.Playtesting
 {
     public sealed class TrialCameraOperator : MonoBehaviour
     {
+        public bool EnableScouts=true;
         SecurityTrialTerminal terminal;
         readonly Dictionary<Camera,Quaternion> homes=new Dictionary<Camera,Quaternion>();
         readonly Dictionary<Camera,Vector2> angles=new Dictionary<Camera,Vector2>();
         void Start(){
             terminal=GetComponent<SecurityTrialTerminal>();
             foreach(var c in terminal.CameraFeeds)if(c){homes[c]=c.transform.localRotation;angles[c]=Vector2.zero;}
-            scouts=new TrialCameraHider[Mathf.Min(3,terminal.CameraFeeds.Length)];
+            if(!EnableScouts){scouts=System.Array.Empty<TrialCameraHider>();return;}
+            scouts=new TrialCameraHider[Mathf.Min(terminal.RoamingEnemyCount,terminal.CameraFeeds.Length)];
             for(int i=0;i<scouts.Length;i++){var h=gameObject.AddComponent<TrialCameraHider>();h.Terminal=terminal;h.Home=terminal.CameraFeeds[i*terminal.CameraFeeds.Length/scouts.Length];h.Number=i+1;scouts[i]=h;}
         }
         TrialCameraHider[] scouts;
+        readonly HashSet<Camera> spottedCameras=new HashSet<Camera>();
+        public int UniqueCameraSpots=>spottedCameras.Count;
         public int Spots{get;private set;}
         public string SpotMessage{get;private set;}="";
         public void Spot(){
@@ -22,8 +26,9 @@ namespace DeadAir.Playtesting
             TrialCameraHider best=null;float distance=2;
             foreach(var scout in scouts){float d=scout.SpotDistance(terminal.WatchedCamera);if(d<distance){distance=d;best=scout;}}
             if(!best){SpotMessage="No new scout in sight.";return;}
-            best.Mark();Spots++;SpotMessage="Scout "+best.Number+" spotted!";
-            Blockout.Discovery.DesignSession.Record("scout_spotted","Scout "+best.Number,best.Feet,Spots);
+            best.Mark();Spots++;spottedCameras.Add(terminal.WatchedCamera);SpotMessage="Enemy spotted! Cameras: "+UniqueCameraSpots+" / 3";
+            Blockout.Discovery.DesignSession.Record("scout_spotted",terminal.WatchedCamera.name,best.Feet,Spots);
+            if(UniqueCameraSpots>=3&&PlaytestHub.Instance)PlaytestHub.Instance.Finish("completed","enemies_spotted_on_three_cameras");
         }
         public void Aim(Camera c,Vector2 delta,bool home=false){
             if(!c||!homes.ContainsKey(c))return;
@@ -53,6 +58,8 @@ namespace DeadAir.Playtesting
         void OnDestroy(){foreach(var pair in homes)if(pair.Key)pair.Key.transform.localRotation=pair.Value;}
     }
 }
+
+
 
 
 

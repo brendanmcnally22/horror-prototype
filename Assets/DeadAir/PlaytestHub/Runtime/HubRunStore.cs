@@ -15,6 +15,7 @@ namespace DeadAir.Playtesting
         public bool demo;
         public int fuseReturns, deaths, interactions, terminalUses, scoutSpots;
         public float terminalSeconds;
+        public List<string> scoutCameraIds=new List<string>();
         public List<string> lightingOrder=new List<string>();
         public List<float> lightingTimes=new List<float>();
         public string feedbackStatus="pending", skipReason="", worked="", confusing="", notes="";
@@ -75,4 +76,5 @@ namespace DeadAir.Playtesting
         }
     }
 }
+
 

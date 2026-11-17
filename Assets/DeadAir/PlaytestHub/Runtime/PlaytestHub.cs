@@ -63,8 +63,8 @@ namespace DeadAir.Playtesting
         {
             if(!Config||loading||!Experience)return;
             if(Experience.Page!=HubPage.Experience)return;
-            if(Keyboard.current!=null&&Keyboard.current.f6Key.wasPressedThisFrame)
-            {if(SwitcherOpen)CloseSwitcher();else if(!FindObjectsByType<DeveloperSettingsMenu>(FindObjectsSortMode.None).Any(d=>d.IsOpen))OpenSwitcher();}
+            if(Keyboard.current!=null&&Keyboard.current.leftBracketKey.wasPressedThisFrame)
+            {if(!FindObjectsByType<DeveloperSettingsMenu>(FindObjectsSortMode.None).Any(d=>d.IsOpen))Finish("completed","manual_finish");return;}
             if(CurrentRun==null)
             {
                 recorder=PlaytestRecorder.Instance;
@@ -88,7 +88,7 @@ namespace DeadAir.Playtesting
             if(Time.realtimeSinceStartupAsDouble>=nextSave){nextSave=Time.realtimeSinceStartupAsDouble+5;HubRunStore.Save(CurrentRun);}
             if(GameManager.HasReference&&GameManager.Instance.PlayerDied){CurrentRun.deaths++;Finish("failed","player_death");return;}
             if(Definition.Kind==HubExperienceKind.Discovery&&discovery&&discovery.Returned>=discovery.RequiredFuses){Finish("completed","three_fuses_returned");return;}
-            // Security is an open-ended evaluation; the player finishes via F6.
+            // Security is an open-ended evaluation; the player finishes via [.
             if(Definition.Kind==HubExperienceKind.Lighting&&lightingFinishedAt>=0&&Time.time>=lightingFinishedAt)Finish("completed","three_lighting_doors_tested");
         }
         void LateUpdate()
@@ -98,7 +98,7 @@ namespace DeadAir.Playtesting
         void TrackEvent(PlaytestEvent evt)
         {
             if(CurrentRun==null)return;
-            if(evt.type=="scout_spotted")CurrentRun.scoutSpots++;
+            if(evt.type=="scout_spotted"){CurrentRun.scoutSpots++;CurrentRun.scoutCameraIds??=new System.Collections.Generic.List<string>();if(!CurrentRun.scoutCameraIds.Contains(evt.objectId))CurrentRun.scoutCameraIds.Add(evt.objectId);}
             if(evt.type=="fuse_returned")CurrentRun.fuseReturns=Mathf.Max(CurrentRun.fuseReturns,Mathf.RoundToInt(evt.value));
             if(evt.type=="terminal_opened"||evt.type=="security_terminal_opened")CurrentRun.terminalUses++;
             if(evt.type=="lever_used"||evt.type=="lighting_door_used"||evt.type=="security_door_used")CurrentRun.interactions++;
@@ -107,7 +107,7 @@ namespace DeadAir.Playtesting
         {
             if(CurrentRun==null||CurrentRun.lightingOrder.Contains(condition))return;
             CurrentRun.lightingOrder.Add(condition);CurrentRun.lightingTimes.Add((float)CurrentRun.activeSeconds);HubRunStore.Save(CurrentRun);
-            if(CurrentRun.lightingOrder.Count>=3)lightingFinishedAt=Time.time+5;
+            Finish("completed","first_door_chosen");
         }
         public void OpenSwitcher()
         {
@@ -179,5 +179,8 @@ namespace DeadAir.Playtesting
         void OnDestroy(){SceneManager.sceneLoaded-=SceneLoaded;if(Instance==this){SealRun("interrupted","play_mode_ended");Instance=null;}}
     }
 }
+
+
+
 
 

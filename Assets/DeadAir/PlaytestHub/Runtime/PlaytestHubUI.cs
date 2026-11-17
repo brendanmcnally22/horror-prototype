@@ -39,9 +39,9 @@ namespace DeadAir.Playtesting
             if(!Config||!Experience)return;Styles();
             if(Experience.Page==HubPage.Experience&&!SwitcherOpen&&!loading)
             {
-                var text=Experience.Objective+"\nF6 — switch experience / finish test";
-                if(Definition!=null&&Definition.Kind==HubExperienceKind.Security&&CurrentRun!=null)text="Explore the cameras and spot the scouts. Finish whenever you like with F6.\nTerminal operation: "+Duration(CurrentRun.terminalSeconds);
-                if(Definition!=null&&Definition.Kind==HubExperienceKind.Lighting&&CurrentRun!=null)text+="\nDoors tested: "+CurrentRun.lightingOrder.Count+" / 3";
+                var text=Experience.Objective+"\n[ — finish level";
+                if(Definition!=null&&Definition.Kind==HubExperienceKind.Security&&CurrentRun!=null)text="Spot enemies on 3 different cameras: "+(CurrentRun.scoutCameraIds?.Count??0)+" / 3\n[ — finish level\nTerminal operation: "+Duration(CurrentRun.terminalSeconds);
+                
                 GUI.Label(new Rect(18,Screen.height-105,Mathf.Min(600,Screen.width-36),100),text,hubSmall);return;
             }
             GUI.depth=-100;
@@ -92,11 +92,16 @@ namespace DeadAir.Playtesting
         }
         void DrawFeedback()
         {
-            GUILayout.Label("How was that experience?",hubTitle);
+            GUILayout.Label(FeedbackRun!=null&&FeedbackRun.experienceId=="lighting"?"Door choice":"How was that experience?",hubTitle);
             if(FeedbackRun==null){GUILayout.Label("No run selected.",hubBody);Action("Back to menu",GoMenu);return;}
             var r=FeedbackRun;
             GUILayout.Label(r.title+"  ·  "+r.outcome+"  ·  active time "+Duration(r.activeSeconds),hubBody);
             GUILayout.Space(7);
+            if(r.experienceId=="lighting"){
+                GUILayout.Label("Why did you choose that door?",hubBody);
+                r.notes=GUILayout.TextArea(r.notes??"",1200,hubField,GUILayout.Height(150));
+                GUILayout.BeginHorizontal();Action("Save feedback & continue",()=>SaveFeedback());Action("Skip",()=>SaveFeedback(true,"skipped"));GUILayout.EndHorizontal();return;
+            }
             r.clarity=Rating("How clear was the objective?",r.clarity);
             r.tension=Rating("How tense did it feel?",r.tension);
             r.enjoyment=Rating("How enjoyable was it?",r.enjoyment);
@@ -154,5 +159,11 @@ namespace DeadAir.Playtesting
         static string Score(int value)=>value<=0?"—":value+"/5";
     }
 }
+
+
+
+
+
+
 
 

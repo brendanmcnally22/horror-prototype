@@ -8,7 +8,25 @@ namespace Blockout.Discovery
         readonly bool[] maximized=new bool[5];
         readonly Rect[] restore=new Rect[5];
         readonly Vector2[] minimum={new Vector2(510,320),new Vector2(650,430),new Vector2(570,400),new Vector2(510,390),new Vector2(720,548)};
-        int sizing=-1,folder=-1,site=-1;
+        int sizing=-1,folder=-1,site=-1,mailIndex=-1;
+        [System.Serializable]public class LocalEmail {public string Sender,Subject;[TextArea(3,12)]public string Body;}
+        [Header("Local email inbox")]
+        public LocalEmail[] Inbox={
+            new LocalEmail{Sender="Security Desk",Subject="Camera shift handover",Body="Check every feed before ending your shift. Use Space to change cameras. Report unusual movement."},
+            new LocalEmail{Sender="Facilities",Subject="Access and shutters",Body="Door access is controlled from Facility Security. Keep the doorway clear before closing a shutter."},
+            new LocalEmail{Sender="Canteen",Subject="Night shift service",Body="Coffee is on. Please return your cups before the shuttle departs."}};
+        void Mail(float w,float h){
+            GUI.Label(new Rect(18,32,w-36,30),"Inbox — "+StationName,heading);
+            float split=Mathf.Min(235,w*.34f);
+            Fill(new Rect(12,75,split,h-110),Color.white);Fill(new Rect(split+23,75,w-split-35,h-110),Color.white);
+            listScroll=GUI.BeginScrollView(new Rect(14,77,split-4,h-114),listScroll,new Rect(0,0,split-24,Mathf.Max(h-120,(Inbox?.Length??0)*62)));
+            if(Inbox!=null)for(int i=0;i<Inbox.Length;i++)if(Inbox[i]!=null&&Button(new Rect(2,i*62,split-28,58),Inbox[i].Sender+"\n"+Inbox[i].Subject)){mailIndex=i;recordScroll=Vector2.zero;}
+            GUI.EndScrollView();
+            string body=Inbox!=null&&mailIndex>=0&&mailIndex<Inbox.Length&&Inbox[mailIndex]!=null?"From: "+Inbox[mailIndex].Sender+"\nSubject: "+Inbox[mailIndex].Subject+"\n\n"+Inbox[mailIndex].Body:"Select a message.";
+            float width=w-split-65,height=Mathf.Max(h-120,text.CalcHeight(new GUIContent(body),width)+20);
+            recordScroll=GUI.BeginScrollView(new Rect(split+30,82,w-split-48,h-124),recordScroll,new Rect(0,0,width,height));GUI.Label(new Rect(3,3,width,height),body,text);GUI.EndScrollView();
+            GUI.Label(new Rect(14,h-28,w-28,24),"Local mail archive",label);
+        }
         string search="";
         [Tooltip("Optional images for Canteen, Transit and Rabbit Club, in that order.")]
         public Texture2D[] GoogusSiteImages=new Texture2D[3];
@@ -74,4 +92,5 @@ namespace Blockout.Discovery
         }
     }
 }
+
 

@@ -83,7 +83,7 @@ namespace Blockout.Discovery
         }
         void OnGUI()
         {
-            if(!ShowPanelMarker || !PowerCut || PowerRestored || !ObjectivePanel || VirgoTerminal.Active) return;
+            if(gameObject.scene.name=="Security Terminal Trial" || !ShowPanelMarker || !PowerCut || PowerRestored || !ObjectivePanel || VirgoTerminal.Active) return;
             var camera=Camera.main; if(!camera) return;
             Vector3 point=camera.WorldToScreenPoint(ObjectivePanel.position+Vector3.up*.8f);
             float x=point.z>0 ? Mathf.Clamp(point.x,150,Screen.width-150) : Screen.width/2;
@@ -93,3 +93,4 @@ namespace Blockout.Discovery
         }
     }
 }
+
