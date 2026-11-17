@@ -27,7 +27,6 @@ namespace DeadAir.Playtesting
         Camera current;
         TrialCameraOperator controls;
         public Camera WatchedCamera=>IsOpen?current:null;
-        void Start(){foreach(var c in CameraFeeds)if(c&&!c.GetComponent<AudioListener>()){c.enabled=false;c.targetTexture=null;}}
         void Awake(){
             if(gameObject.scene.path=="Assets/DeadAir/PlaytestHub/Scenes/Security Terminal Trial.unity")
                 controls=gameObject.AddComponent<TrialCameraOperator>();
@@ -61,7 +60,7 @@ namespace DeadAir.Playtesting
         public void Close()
         {
             if(!IsOpen)return;ReleaseCamera();
-            foreach(var entry in cameraStates)if(entry.Key){entry.Key.enabled=false;entry.Key.targetTexture=null;}
+            foreach(var entry in cameraStates)if(entry.Key){entry.Key.enabled=entry.Value.enabled;entry.Key.targetTexture=entry.Value.target;}
             cameraStates.Clear();Active=null;
             if(!desktopSession)
             {
@@ -72,7 +71,7 @@ namespace DeadAir.Playtesting
             DesignSession.Record("security_terminal_closed",name,transform.position);
         }
         void Update(){if(IsOpen&&!desktopSession&&Keyboard.current!=null&&Keyboard.current.escapeKey.wasPressedThisFrame)Close();}
-        float nextAnalogFrame; void LateUpdate(){foreach(var camera in CameraFeeds)if(camera&&!camera.GetComponent<AudioListener>()&&(!IsOpen||camera!=current)){camera.enabled=false;camera.targetTexture=null;}if(IsOpen){if(controls&&current){bool refresh=Time.unscaledTime>=nextAnalogFrame;current.enabled=refresh;if(refresh)nextAnalogFrame=Time.unscaledTime+1f/12f;}Cursor.lockState=CursorLockMode.None;Cursor.visible=true;}}
+        float nextAnalogFrame; void LateUpdate(){if(IsOpen){if(controls&&current){bool refresh=Time.unscaledTime>=nextAnalogFrame;current.enabled=refresh;if(refresh)nextAnalogFrame=Time.unscaledTime+1f/12f;}Cursor.lockState=CursorLockMode.None;Cursor.visible=true;}}
         public void NextFeed(){if(IsOpen&&CameraFeeds.Length>0)SelectFeed((selected+1)%CameraFeeds.Length);}
         void SelectFeed(int index)
         {
@@ -84,7 +83,7 @@ namespace DeadAir.Playtesting
         }
         void ReleaseCamera()
         {
-            if(current){current.enabled=false;current.targetTexture=null;}current=null;
+            if(current){current.targetTexture=previousTarget;current.enabled=previousEnabled;}current=null;
             if(feed){feed.Release();Destroy(feed);feed=null;}
         }
         void OnDisable(){Close();}void OnDestroy(){ReleaseCamera();}

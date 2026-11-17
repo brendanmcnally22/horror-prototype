@@ -70,6 +70,11 @@ namespace DeadAir.Playtesting
                     if(Terminal.RoamingEnemyModel){
                         subject.GetComponent<Renderer>().enabled=false;eye.SetActive(false);
                         var visual=Instantiate(Terminal.RoamingEnemyModel,subject.transform);
+                        // Imported character models may include export-preview cameras and lights.
+                        // Keep the existing player and CCTV cameras in charge of rendering.
+                        foreach(var embeddedCamera in visual.GetComponentsInChildren<Camera>(true))embeddedCamera.enabled=false;
+                        foreach(var embeddedLight in visual.GetComponentsInChildren<Light>(true))embeddedLight.enabled=false;
+                        foreach(var embeddedListener in visual.GetComponentsInChildren<AudioListener>(true))embeddedListener.enabled=false;
                         foreach(var bodyCollider in visual.GetComponentsInChildren<Collider>())bodyCollider.enabled=false;
                         var rs=visual.GetComponentsInChildren<Renderer>();if(rs.Length>0){var bounds=rs[0].bounds;foreach(var r in rs)bounds.Encapsulate(r.bounds);visual.transform.localScale*=Height/Mathf.Max(.01f,bounds.size.y);bounds=rs[0].bounds;foreach(var r in rs)bounds.Encapsulate(r.bounds);visual.transform.position+=subject.transform.position-bounds.center;}
                     }

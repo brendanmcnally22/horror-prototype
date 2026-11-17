@@ -177206,7 +177206,7 @@ MonoBehaviour:
     m_Bits: 6145
   ControllerOffset: 0
   PlayerBasicSettings:
-    WalkSpeed: 2.5
+    WalkSpeed: 2.6
     RunSpeed: 6
     CrouchSpeed: 1
     JumpHeight: 1
