@@ -35282,6 +35282,10 @@ PrefabInstance:
       propertyPath: Acceleration
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 8164320498880707648, guid: e7154abdda37a8348bd61ba5cd3b78bd, type: 3}
+      propertyPath: ReturnAfterUse
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
